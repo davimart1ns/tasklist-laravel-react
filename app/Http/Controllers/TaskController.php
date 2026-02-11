@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Task;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TaskController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -36,10 +38,12 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
             'completed' => 'nullable|boolean',
+            'task_list_id' => 'required|exists:task_lists,id',
             'due_date' => 'nullable|date',
         ]);
 
@@ -94,6 +98,6 @@ class TaskController extends Controller
 
         $task->delete();
 
-        return redirect()->route('tasks.index')->with('sucess', 'Tarefa deletada com sucesso!');
+        return redirect()->route('tasklists.show', $task->task_list_id)->with('sucess', 'Tarefa deletada com sucesso!');
     }
 }
