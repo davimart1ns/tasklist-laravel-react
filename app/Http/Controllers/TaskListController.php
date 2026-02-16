@@ -28,6 +28,7 @@ class TaskListController extends Controller
 
         return Inertia::render('TaskLists/Index', [
             'taskLists' => $tasklists,
+            'tasklistTotal' => $tasklists->count(),
             'totalTasks' => Auth::user()->tasks()->count(),
             'pendingTasks' => Auth::user()->tasks()->where('completed', false)->count(),
         ]);
@@ -36,22 +37,7 @@ class TaskListController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $colors = [
-            '#3b82f6', // blue
-            '#ef4444', // red
-            '#10b981', // green
-            '#f59e0b', // yellow
-            '#8b5cf6', // purple
-            '#ec4899', // pink
-            '#6366f1', // indigo
-        ];
-
-        return Inertia::render('TaskLists/Form', [
-            'colors' => $colors,
-        ]);
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
@@ -101,25 +87,7 @@ class TaskListController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TaskList $tasklist)
-    {
-        $this->authorize('update', $tasklist);
-
-        $colors = [
-            '#3b82f6',
-            '#ef4444',
-            '#10b981',
-            '#f59e0b',
-            '#8b5cf6',
-            '#ec4899',
-            '#6366f1',
-        ];
-
-        return Inertia::render('TaskLists/Index', [
-            'tasklist' => $tasklist,
-            'colors' => $colors,
-        ]);
-    }
+    public function edit(TaskList $tasklist) {}
 
     /**
      * Update the specified resource in storage.

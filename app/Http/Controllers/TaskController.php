@@ -51,7 +51,7 @@ class TaskController extends Controller
 
         $task = Task::create($validated);
 
-        return redirect()->route('tasks.show', $task->id)->with('sucess', 'Tarefa criada com sucesso!');
+        return redirect()->route('tasklists.show', $task->task_list_id)->with('success', 'Tarefa criada com sucesso!');
     }
 
     /**
@@ -86,7 +86,7 @@ class TaskController extends Controller
 
         $task->update($validated);
 
-        return redirect()->route('tasks.show', $task->id)->with('success', 'Tarefa atualizada com sucesso!');
+        return redirect()->route('tasklists.show', $task->task_list_id)->with('success', 'Tarefa atualizada com sucesso!');
     }
 
     /**
@@ -98,6 +98,6 @@ class TaskController extends Controller
 
         $task->delete();
 
-        return redirect()->route('tasklists.show', $task->task_list_id)->with('sucess', 'Tarefa deletada com sucesso!');
+        return redirect()->route('tasklists.show', $task->task_list_id)->with('success', 'Tarefa deletada com sucesso!');
     }
 }
