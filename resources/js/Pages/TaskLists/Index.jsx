@@ -38,13 +38,13 @@ export default function Index({ tasklistTotal, taskLists, totalTasks, pendingTas
     }, [flash.success])
 
     const colors = [
-        '#3b82f6', // blue
-        '#ef4444', // red
-        '#10b981', // green
-        '#f59e0b', // yellow
-        '#8b5cf6', // purple
-        '#ec4899', // pink
-        '#6366f1', // indigo
+        { value: '#3b82f6', name: 'Azul' },
+        { value: '#ef4444', name: 'Vermelho' },
+        { value: '#10b981', name: 'Verde' },
+        { value: '#f59e0b', name: 'Amarelo' },
+        { value: '#8b5cf6', name: 'Roxo' },
+        { value: '#ec4899', name: 'Rosa' },
+        { value: '#6366f1', name: 'Índigo' },
     ]
 
     const { data, setData, post, put, reset, processing, errors } = useForm({
@@ -109,17 +109,29 @@ export default function Index({ tasklistTotal, taskLists, totalTasks, pendingTas
                 )}
 
                 <div className='mb-6 p-4 bg-white rounded-lg shadow-md border border-gray-100'>
-                    <div className='flex items-center gap-1 mb-2'>
-                        <div> <ListBulletIcon className='w-8 w-8' /></div>
-                        <h1 className=' text-3xl font-bold text-gray-800 ml-2'> Minhas listas</h1>
+                    <div className='flex flex-col md:flex md>items-center md:justify-between gap-4'>
+                        <div className='flex items-center gap-3'>
+                            <div className='p-2 bg-blue-100 rounded-lg'>
+                                <ListBulletIcon className='w-7 h-8 text-blue-600' />
+                            </div>
 
-                        <button
-                            onClick={openCreate}
-                            className="ml-auto inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600  bg-green-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 font-medium "
-                        >
-                            <PlusIcon className='w-4 h-4' /> Nova lista
-                        </button>
+                            <div>
+                                <h1 className=' text-3xl font-bold text-gray-900 '> Minhas listas</h1>
+                                <p className='text-sm text-gray-500'>
+                                    Gerencie suas listas de forma organizada
+                                </p>
+                            </div>
+
+                            <button
+                                onClick={openCreate}
+                                className="ml-auto inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600  bg-green-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 font-medium"
+                            >
+                                <PlusIcon className='w-5 h-5' /> Nova lista
+                            </button>
+                        </div>
                     </div>
+
+
                     <div className='flex flex-wrap gap-3 mt-5'>
                         <span className='px-3 py-2 bg-blue-100 text-blue-800 rounded-lg'>Total de tarefas : {totalTasks}</span>
                         <span className='bg-red-100 text-red-800 px-3 py-2 rounded-lg
@@ -146,7 +158,7 @@ export default function Index({ tasklistTotal, taskLists, totalTasks, pendingTas
                             <div className='p-4 flex justify-between items-start'>
 
                                 <div>
-                                    <div className='flex items-center gap-2'>
+                                    <div className='flex items-center gap-3'>
                                         <h2 className='text-xl font-semibold' >{list.name}</h2>
                                         <span className='text-gray-600 text-sm'>({list.tasks_count} pendentes)</span>
                                     </div>
@@ -180,21 +192,22 @@ export default function Index({ tasklistTotal, taskLists, totalTasks, pendingTas
                 {isOpen && (
                     <div className='fixed inset-0 z-50 flex items-center justify-center p-4'>
 
-                        <div className='absolute inset-0 bg-black/50'
+                        <div className='absolute inset-0 bg-black/40 backdrop-blur-sm'
                             onClick={() => setIsOpen(false)} />
 
-                        <div className='relative bg-white p-6 rounded-xl shadow-lg w-full max-w-md z-10'>
-                            <h1 className='text-2xl font-bold mb-4'> {editingList ? 'Editar lista' : 'Criar lista'}</h1>
+                        <div className='relative bg-white rounded-2xl shadow-2xl
+                        w-full max-w-md p-6 transform transition-all'>
+                            <h1 className='text-2xl font-bold text-gray-800 mb-6'> {editingList ? 'Editar lista' : 'Nova lista'}</h1>
 
-                            <form onSubmit={submit} className='space-y-4'>
+                            <form onSubmit={submit} className='space-y-5'>
                                 <div>
-                                    <label className='block mb-1'> Nome da lista</label>
+                                    <label htmlFor="title" className='block text-sm font-medium text-gray-700 mb-1'> Titulo <span className='text-red-500'>*</span></label>
                                     <input
                                         type='text'
-                                        className='border rounded w-full p-2'
+                                        className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition'
                                         value={data.name}
                                         onChange={e => setData('name', e.target.value)}
-                                        placeholder='Nome da lista'
+                                        placeholder='Digite o título da lista'
                                     />
                                     {errors.name && (
                                         <div className='text-red-600 text-sm'>{errors.name}</div>
@@ -202,10 +215,10 @@ export default function Index({ tasklistTotal, taskLists, totalTasks, pendingTas
                                 </div>
 
                                 <div>
-                                    <label className='block mb-1'>Descrição</label>
+                                    <label className='block text-sm font-medium text-gray-700 mb-1'>Descrição</label>
                                     <textarea
-                                        rows={4}
-                                        className='border rounded w-full p-1'
+                                        rows={3}
+                                        className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition'
                                         value={data.description}
                                         onChange={e => setData('description', e.target.value)}
                                         placeholder='Descrição da lista'
@@ -216,32 +229,35 @@ export default function Index({ tasklistTotal, taskLists, totalTasks, pendingTas
                                 </div>
 
                                 <div>
-                                    <label className='block mb-1'>Cor</label>
-                                    <div className='flex gap-2 flex-wrap'>
+                                    <label className='block text-sm font-medium text-gray-700 mb-2'>
+                                        Cor da lista
+                                    </label>
+                                    <div className='flex gap-3 flex-wrap'>
                                         {colors.map(color => (
                                             <button
                                                 type='button'
-                                                key={color}
-                                                onClick={() => setData('color', color)}
-                                                className='w-8 h-8 rounded-full border-2'
-                                                style={{
-                                                    backgroundColor: color,
-                                                    borderColor:
-                                                        data.color === color ? 'black' : 'transparent'
-                                                }}
-                                            />
+                                                key={color.value}
+                                                onClick={() => setData('color', color.value)}
+                                                className='group relative'
+                                                title={color.name}
+                                            >
+                                                <div className={`w-10 h-10 rounded-full transition-all ${data.color === color.value
+                                                    ? 'ring-2 ring-offset-2 ring-gray-400 scale-110' : 'hover:scale-105'
+                                                    }`}
+                                                    style={{ backgroundColor: color.value }} />
+                                            </button>
                                         ))}
                                     </div>
                                 </div>
 
-                                <div className='flex gap-2'>
+                                <div className='flex gap-2 pt-4'>
                                     <button disabled={processing}
-                                        className='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700'> {editingList ? 'Salvar alterações' : 'Criar'}</button>
+                                        className='flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all font-medium disabled:opacity-50'> {editingList ? 'Salvar alterações' : 'Criar'}</button>
 
                                     <button
                                         type='button'
                                         onClick={() => setIsOpen(false)}
-                                        className='bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700'> Cancelar</button>
+                                        className='flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-all font-medium disabled:opacity-50'> Cancelar</button>
                                 </div>
                             </form>
                         </div>

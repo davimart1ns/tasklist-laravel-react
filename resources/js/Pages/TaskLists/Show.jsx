@@ -136,8 +136,8 @@ export default function Show({ tasklist, tasks, stats }) {
                         <h1 className="text-3xl font-bold text-gray-800">{tasklist.name}</h1>
 
                         <button onClick={openCreate}
-                            className="ml-auto inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600  bg-green-600 text-white px-4 py-2.5 rounded-lg shadow-md hover:shadow-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 font-medium ">
-                            <PlusIcon className="w-5 h-5" /> Nova Tarefa
+                            className="ml-auto inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600  bg-green-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg hover:from-green-600 hover:to-green-700 transition-all duration-200 font-medium ">
+                            <PlusIcon className="w-5 h-5" /> Nova tarefa
                         </button>
                     </div>
 
@@ -153,7 +153,7 @@ export default function Show({ tasklist, tasks, stats }) {
                             Concluídas: {stats.completed}
                         </span>
                         <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded">
-                            Total: {stats.pending}
+                            Pendentes: {stats.pending}
                         </span>
 
                     </div>
@@ -207,7 +207,7 @@ export default function Show({ tasklist, tasks, stats }) {
                                         )}
                                     </div>
                                     <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                                        <button className="p-2 text-yellow-600 hover:bg-yellow-50 rounded-lg transition"
                                             onClick={() => openEdit(task)}
                                             title="Editar" ><PencilIcon className="w-4 h-4" /></button>
                                         <button className="p-3 text-red-600 hover:bg-red-50 rounded-lg transition"
@@ -262,7 +262,7 @@ export default function Show({ tasklist, tasks, stats }) {
                                 <div className="flex gap-2 pt-4">
                                     <button disabled={processing}
                                         className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all font-medium disabled:opacity-50">
-                                        {editingTask ? 'Editar tarefa' : 'Criar tarefa'}
+                                        {editingTask ? 'Salvar alterações' : 'Criar tarefa'}
                                     </button>
 
                                     <button type="button"
