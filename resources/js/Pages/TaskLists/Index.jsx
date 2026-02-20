@@ -252,7 +252,7 @@ export default function Index({ tasklistTotal, taskLists, totalTasks, pendingTas
 
                                 <div className='flex gap-2 pt-4'>
                                     <button disabled={processing}
-                                        className='flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all font-medium disabled:opacity-50'> {editingList ? 'Salvar alterações' : 'Criar'}</button>
+                                        className='flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all font-medium disabled:opacity-50'> {editingList ? 'Salvar alterações' : 'Criar lista'}</button>
 
                                     <button
                                         type='button'
