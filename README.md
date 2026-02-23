@@ -2,6 +2,10 @@
 
 Aplicação web para gerenciamento de listas de tarefas, permitindo criar listas e adicionar tarefas com datas, descrições e status de conclusão.
 
+Projeto desenvolvido com Laravel no back-end e React + Inertia no front-end.
+
+--- 
+
 ## 🚀 Funcionalidades
 
 - Criar listas de tarefas
@@ -12,6 +16,8 @@ Aplicação web para gerenciamento de listas de tarefas, permitindo criar listas
 - Excluir tarefas
 - Feedback visual de ações (mensagens de sucesso/erro)
 - Interface moderna e responsiva
+
+---
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -26,6 +32,8 @@ Aplicação web para gerenciamento de listas de tarefas, permitindo criar listas
 - Inertia.js
 - Tailwind CSS
 - Heroicons
+
+---
 
 ## 📦 Instalação (Ambiente de Desenvolvimento)
 
