@@ -109,7 +109,7 @@ export default function Index({ tasklistTotal, taskLists, totalTasks, pendingTas
                         <TaskListCard
                             key={list.id}
                             list={list}
-                            onEdit={openEdit} />
+                            openEdit={openEdit} />
                     ))}
                 </div>
 
